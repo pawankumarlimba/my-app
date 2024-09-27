@@ -31,7 +31,7 @@ const handleSubmit =async (e: React.FormEvent<HTMLFormElement>) => {
       
       
       console.log(response.data);
-      if(response.data.succuss){
+      if(response.data.success){
      
         toast.success("Admin login succesfully");
         window.location.replace('/admin');
