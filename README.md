@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SaaS-Like Contact Form Project
 
-## Getting Started
+This project is a SaaS-like contact form system built using React/Next.js and Tailwind CSS. It allows an admin to create customizable contact forms for multiple clients. Each client can redirect their domain to our system, displaying a contact form with their branding. The project supports multi-tenant functionality, allowing clients to manage their own form submissions.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Admin Panel
+- **Admin Login:** Admin can log in using the following credentials:
+  - **Email:** pawankumarlimba@12345
+  - **Password:** 12345
+- **Manage Clients:**
+  - Create new clients with a custom domain, logo, heading, and contact email.
+  - Assign unique usernames and passwords for clients to access their form submissions.
+  - View and manage all existing clients, including total form submissions per domain.
+  - Add or delete clients and their associated data.
+  
+### Client-Side (Whitelabel Contact Form)
+- **Customizable Contact Form:**
+  - Each client domain will display a unique contact form with fields: Name, Email, and Message.
+  - The form is branded with the client's logo and heading.
+- **Form Submission:**
+  - Form responses are sent to the email address configured by the admin for that client.
+- **Client Login:**
+  - Clients can log in to view their form submissions using the credentials provided by the admin.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Backend
+- Handles admin authentication and client management.
+- Provides an API for clients to view their form entries.
+- Sends form responses to the specified email address.
+- Stores client data, logos, and form submissions in a database (e.g., MongoDB, PostgreSQL).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Frontend
+- Built using React.js and Next.js.
+- Styled with Tailwind CSS for a modern and responsive UI.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Deployment
+- Deployed to Vercel.
+- Live URL: [https://my-app-two-delta-88.vercel.app/](https://my-app-two-delta-88.vercel.app/)
 
-## Learn More
+## Project Setup
 
-To learn more about Next.js, take a look at the following resources:
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/pawankumarlimba/my-app.git
+   ```
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+3. **Environment Variables:**
+   Create a `.env.local` file in the root directory and add the following environment variables:
+   ```bash
+   CLOUDINARY_CLOUD_NAME=<your-cloudinary-cloud-name>
+   CLOUDINARY_API_KEY=<your-cloudinary-api-key>
+   CLOUDINARY_API_SECRET=<your-cloudinary-api-secret>
+   MONGODB_URI=<your-mongodb-uri>
+   ```
+4. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Usage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Admin Login:**
+   - Navigate to the admin login page at `/admin/login`.
+   - Use the provided credentials to log in and manage clients.
 
-## Deploy on Vercel
+2. **Client Login:**
+   - Each client can log in using their unique username and password at `/client/login`.
+   - Clients can view and manage their form submissions.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Form Submission:**
+   - Each client's domain will redirect to the customized contact form.
+   - Users can fill out the form, and the responses will be sent to the configured email address.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contributing
+
+Feel free to submit issues and pull requests if you find any bugs or want to contribute to the project.
