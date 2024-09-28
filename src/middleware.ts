@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
 
   if (isPublic && token) {
     console.log('Redirecting to /client'); 
-    return NextResponse.redirect(new URL('/client', request.url));
+    return NextResponse.redirect(new URL('/', request.url));
   }
   if (!isPublic && !token) {
     console.log('Redirecting to /'); 
