@@ -4,21 +4,19 @@ import Client from '@/moduls/client';
 import bcryptjs from 'bcryptjs';
 import { NextResponse, NextRequest } from 'next/server';
 
-interface UploadImageResponse {
-  secure_url: string;
-}
-
 DB();
 
 export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.formData();
-    const email = reqBody.get('email') as string;
-    const password = reqBody.get('password');
+    
 
-    if (!email || !password || typeof password !== 'string') {
+    const email = reqBody.get('email') as string | null;
+    const password = reqBody.get('password') as string | null;
+
+    if (!email || !password) {
       return NextResponse.json(
-        { error: 'Email and password must be provided, and password must be a string' },
+        { error: 'Email and password must be provided' },
         { status: 400 }
       );
     }
@@ -31,30 +29,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
+
     const salt = await bcryptjs.genSalt(10);
     const hashedPassword = await bcryptjs.hash(password, salt);
 
+   
     const file = reqBody.get('logo') as File | null;
-    let logoUrl = null;
+    let url = '';
 
-    if (file) {
-      try {
-        const data = await UploadImage(file, 'designs') as unknown as UploadImageResponse; 
-        logoUrl = data.secure_url;
-      } catch (uploadError) {
-        console.error('Image upload error:', uploadError);
-        return NextResponse.json(
-          { error: 'Failed to upload image' },
-          { status: 500 }
-        );
-      }
+    if (file && file instanceof File) {
+      
+      const data = (await UploadImage(file, 'designs')) as { secure_url: string };
+      url = data.secure_url;
+      console.log("Uploaded file URL:", url);
     }
 
     const newClient = new Client({
       username: reqBody.get('username') as string,
       email,
       password: hashedPassword,
-      logo: logoUrl,
+      logo: url,
       heading: reqBody.get('heading') as string,
     });
 

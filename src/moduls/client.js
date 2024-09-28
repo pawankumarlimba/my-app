@@ -30,6 +30,10 @@ const clientSchema=new mongoose.Schema({
         type:Number,
         default:0
     },
+    isBlacklisted:{
+        type:Boolean,
+        default:false
+    },
     forgatePasswordToken:String,
     forgatePasswordTokenExpiry:Date,
     verifyToken:String,

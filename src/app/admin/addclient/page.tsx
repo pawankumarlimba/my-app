@@ -20,7 +20,7 @@ export default function AddClient() {
     e.preventDefault();
 
     try {
-      // Prepare form data
+     
       const formData = new FormData();
       formData.append('email', client.email);
       formData.append('password', client.password);
@@ -30,8 +30,8 @@ export default function AddClient() {
       if (logo) {
         formData.append('logo', logo);
       }
+      console.log(logo);
 
-      // Make POST request to the backend
       const response = await axios.post('/api/admindashbord/addclient', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -52,8 +52,11 @@ export default function AddClient() {
 
   return (
     <div className="flex ">
+      
       <div className="mt-10 max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black ">
+      <h1 className="text-center font-bold text-xl">Add New Client</h1>
         <form className="my-8 " onSubmit={handleSubmit}>
+       
           <LabelInputContainer className="mb-4">
             <Label htmlFor="text">UserName</Label>
             <Input

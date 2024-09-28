@@ -12,10 +12,7 @@ const adminSchema=new mongoose.Schema({
         type:String,
         required:[true,"please provide a password"],
     },
-    isVarified:{
-        type:Boolean,
-        default:false,
-    },
+    
     forgatePasswordToken:String,
     forgatePasswordTokenExpiry:Date,
     verifyToken:String,

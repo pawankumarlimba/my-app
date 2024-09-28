@@ -13,7 +13,7 @@ import { toast } from 'react-toastify';
 function Page() {
   const handleLogout = async () => {
     try {
-      const response = await axios.get('/api/admin/logout');
+      const response = await axios.get('/api/client/logout');
 
         toast.success('Admin logout succesfully');
         console.log(response);
@@ -40,9 +40,10 @@ function Page() {
           </Button>
         </div>
         <h1 className="text-2xl md:text-7xl text-center font-sans font-bold">Admin DashBord</h1></div>
-        <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3  py-10 gap-3 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10 gap-3">
+
         <Link href={"/admin/addclient"}>
-            <div className="   flex justify-center">
+            <div className="   flex justify-center mr-[-39%] md:mr-0">
             <div className="card w-96 bg-base-100 shadow-xl mb-6 items-center">
             <div className="card-body items-center text-center">
             <h2 className="card-title text-xl ">Add Client</h2> </div>
@@ -54,7 +55,7 @@ function Page() {
 </div> 
             </div></Link>
             <Link href={"/admin/deleteclient"}>
-            <div className="   flex justify-center ">
+            <div className="   flex justify-center  mr-[-39%] md:mr-0">
             <div className="card w-96 bg-base-100 shadow-xl mb-6 items-center">
             <div className="card-body items-center text-center">
             <h2 className="card-title text-xl ">Remove Client</h2> </div>

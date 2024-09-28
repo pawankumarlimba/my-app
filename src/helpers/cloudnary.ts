@@ -1,41 +1,32 @@
-import { config } from 'dotenv'; 
-import { v2 as cloudinary, UploadApiErrorResponse, UploadApiResponse } from 'cloudinary'; 
+import cloudinary from 'cloudinary';
 
 
-config();
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+cloudinary.v2.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME!,
+  api_key: process.env.CLOUDINARY_API_KEY!,
+  api_secret: process.env.CLOUDINARY_API_SECRET!,
 });
 
 
-interface CloudinaryResponse {
-  url: string; 
-  public_id: string; 
-
-}
-
-export const UploadImage = async (file: File, folder: string): Promise<CloudinaryResponse> => {
+export const UploadImage = async (file: File, folder: string): Promise<cloudinary.UploadApiResponse> => {
+ 
   const buffer = await file.arrayBuffer();
   const bytes = Buffer.from(buffer);
-  
+
+ 
   return new Promise((resolve, reject) => {
-    cloudinary.uploader.upload_stream(
-      {
-        resource_type: 'auto',
-        folder: folder,
-      },
-      (err: UploadApiErrorResponse | undefined, result: UploadApiResponse | undefined) => { 
-        if (err) {
-          return reject(err.message);
+    const uploadStream = cloudinary.v2.uploader.upload_stream(
+      { resource_type: 'auto', folder: folder },
+      (error, result) => {
+        if (error) {
+          return reject(new Error(error.message)); 
         }
         if (result) {
-          return resolve({ url: result.secure_url, public_id: result.public_id }); 
+          resolve(result); 
         }
-        reject('Unknown error occurred'); 
       }
-    ).end(bytes);
+    );
+
+    uploadStream.end(bytes); 
   });
 };
