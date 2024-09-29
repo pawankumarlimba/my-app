@@ -103,22 +103,23 @@ export default function Domain({ params }: DomainProps) {
         domainData && (
           <>
             <div className="flex mt-5 w-[100%] lg:w-[90%] md:w-[98%] mx-auto rounded-none md:rounded-2xl p-4 md:p-3 shadow-input bg-white">
-              {url && (
-                <div className="w-[90%]">
-                  <Image
-                    src={url}
-                    alt="Description of the logo"
-                    width={100}
-                    height={90}
-                  />
-                </div>
-              )}
-              <div>
-                <p className="text-2xl sm:text-3xl text-blue-900 lg:sm:text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl">
-                  {head}
-                </p>
-              </div>
-            </div>
+  {url && (
+    <div className="w-[70%]">
+      <Image
+        src={url}
+        alt="Description of the logo"
+        width={100}
+        height={90}
+      />
+    </div>
+  )}
+  <div className="flex-1 overflow-hidden">
+    <p className="text-2xl sm:text-3xl text-blue-900 lg:sm:text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl whitespace-nowrap overflow-hidden text-ellipsis text-right">
+      {head}
+    </p>
+  </div>
+</div>
+
             <div className="mt-10 max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
               <form className="my-8" onSubmit={handleSubmit}>
                 <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
