@@ -3,6 +3,8 @@ import { UploadImage } from '@/helpers/cloudnary';
 import Client from '@/moduls/client';
 import bcryptjs from 'bcryptjs';
 import { NextResponse, NextRequest } from 'next/server';
+import { revalidatePath } from 'next/cache';
+
 
 DB();
 
@@ -22,6 +24,7 @@ export async function POST(request: NextRequest) {
     }
 
     const existingClient = await Client.findOne({ email });
+    revalidatePath('/admin/deleteclient')
     if (existingClient) {
       return NextResponse.json(
         { error: 'Client already registered' },

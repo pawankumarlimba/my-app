@@ -1,6 +1,7 @@
 import DB from '@/app/lib/dbconnect';
 import Client from '@/moduls/client';
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 
 DB();
 

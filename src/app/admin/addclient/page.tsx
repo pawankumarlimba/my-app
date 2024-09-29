@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 import axios from 'axios';
 import React, { useState } from 'react';
 import { toast } from "react-toastify";
-
 export default function AddClient() {
   const [client, setClient] = useState({
     email: "",
@@ -40,7 +39,9 @@ export default function AddClient() {
 
       if (response.data.success) {
         toast.success("Client added successfully");
+
         window.location.replace('/admin');
+        //revalidatePath('/admin/addclient')
       } else {
         toast.error("Client not added");
       }
