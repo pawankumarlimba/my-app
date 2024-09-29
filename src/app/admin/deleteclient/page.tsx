@@ -39,7 +39,7 @@ function Page() {
       const response = await axios.post('/api/admindashbord/deleteclient', { id });
       if (response.data.success) {
         toast.success('Client removed successfully.');
-        setAllarts(Allarts.filter(client => client._id !== id)); 
+       
       } else {
         toast.error('Failed to remove client.');
       }
