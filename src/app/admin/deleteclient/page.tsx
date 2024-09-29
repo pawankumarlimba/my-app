@@ -20,7 +20,7 @@ function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get<{ data: Webinar[] }>(
+        const response = await axios.post<{ data: Webinar[] }>(
           '/api/admindashbord/showallclient'
         );
         console.log(response.data.data);

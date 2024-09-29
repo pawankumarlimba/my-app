@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 DB();
 
-export async function GET() { // Prefix with _ to indicate unused
+export async function POST() { // Prefix with _ to indicate unused
     try {
         const clients = await Client.find({});
         if (!clients || clients.length === 0) {
