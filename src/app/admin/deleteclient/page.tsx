@@ -88,7 +88,7 @@ function Page() {
                 <p className='text-gray-600 truncate'>
                   Blacklisted: {user.isBlacklisted ? 'Yes' : 'No'}
                 </p>
-                <p className='text-gray-600 '>Domain:https://my-app-two-delta-88.vercel.app/{user.username}</p>
+                <p className='text-gray-600 '>Domain:https://my-app-two-delta-88.vercel.app/client/{user.username}</p>
               </div>
               <div className='flex space-x-3'>
                 <button
