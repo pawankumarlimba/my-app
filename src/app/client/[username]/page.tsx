@@ -89,7 +89,11 @@ export default function Domain({ params }: DomainProps) {
 
   return (
     <div className="flex flex-col">
-      {blacklist ? (
+      {loadingData ? (
+        <div className="flex justify-center items-center text-center h-screen">
+          <h1 className="text-2xl">Loading...</h1>
+        </div>
+      ) : blacklist ? (
         <div className="flex justify-center items-center text-center h-screen">
           <h1 className="text-2xl sm:text-3xl text-blue-900 lg:sm:text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl">
             This Client is blacklisted
