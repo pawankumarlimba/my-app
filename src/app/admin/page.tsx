@@ -14,7 +14,7 @@ function Page() {
   const handleLogout = async () => {
     try {
       const response = await axios.get('/api/admindashbord/logout');
-
+//nn
         toast.success('Admin logout succesfully');
         console.log(response);
         window.location.replace('/admin/login');
@@ -74,3 +74,4 @@ function Page() {
 }
 
 export default Page;
+// save
