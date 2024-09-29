@@ -7,16 +7,19 @@ export function middleware(request: NextRequest) {
   const isPublic = path === '/' || path === '/admin/login' || path === '/client/login';
 
   const token = request.cookies.get("token")?.value || '';
-  
-
+  const token1 = request.cookies.get("token1")?.value || '';
+console.log("token1",token1);
   //console.log(`Path: ${path}, Token: ${token}`);
+  if (isPublic && token1) {
+    console.log('Redirecting to /'); 
+    return NextResponse.redirect(new URL('/admin', request.url));
+  }
 
-
-  if (isPublic && token) {
+ else if (isPublic && token) {
     console.log('Redirecting to /'); 
     return NextResponse.redirect(new URL('/client', request.url));
   }
-  if (!isPublic && !token) {
+  if (!isPublic && !token && !token1) {
     console.log('Redirecting to /'); 
     return NextResponse.redirect(new URL('/', request.url));
   }

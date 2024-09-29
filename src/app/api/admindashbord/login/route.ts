@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
             id: admin._id,
             username: admin.username
         };
-        const token = await jwt.sign(tokendata, process.env.TOKEN!, { expiresIn: '10d' });
+        const token1 = await jwt.sign(tokendata, process.env.TOKEN!, { expiresIn: '10d' });
 
         const response = NextResponse.json({
             message: "Logged in successfully",
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
             status: 200
         });
 
-        response.cookies.set("token", token, {
+        response.cookies.set("token1", token1, {
             httpOnly: true
         });
 
