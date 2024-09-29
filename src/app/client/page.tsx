@@ -16,7 +16,7 @@ const Page = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get<{ messages: Webinar[] }>('/api/client/clientsidedata');
+        const response = await axios.post<{ messages: Webinar[] }>('/api/client/clientsidedata');
         setAllarts(response.data.messages);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -28,7 +28,7 @@ const Page = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get('/api/client/logout');
+      const response = await axios.post('/api/client/logout');
       toast.success('User logged out successfully');
       console.log(response);
       window.location.replace('/client/login');

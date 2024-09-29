@@ -13,8 +13,8 @@ import { toast } from 'react-toastify';
 function Page() {
   const handleLogout = async () => {
     try {
-      const response = await axios.get('/api/admindashbord/logout');
-//nn
+      const response = await axios.post('/api/admindashbord/logout');
+
         toast.success('Admin logout succesfully');
         console.log(response);
         window.location.replace('/admin/login');

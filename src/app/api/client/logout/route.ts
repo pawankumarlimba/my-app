@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 DB();
 
-export async function GET() { 
+export async function POST() { 
     try {
        
         const response = NextResponse.json({

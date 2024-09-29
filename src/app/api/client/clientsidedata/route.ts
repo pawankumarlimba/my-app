@@ -6,7 +6,7 @@ import Client from "@/moduls/client";
 
 DB();
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
     const adminId = await getDataFromToken(request);
 
@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
     });
 
   } catch (error: unknown) {
-    console.error('Error fetching messages:', error); // Optional: Log for debugging
+    console.error('Error fetching messages:', error); 
     if (error instanceof Error) {
       return NextResponse.json({
         error: error.message,

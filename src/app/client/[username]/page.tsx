@@ -27,7 +27,7 @@ export default function Domain({ params }: DomainProps) {
   const [url, setUrl] = useState<string | null>(null);
   const [blacklist, setBlacklist] = useState<boolean>(false);
 
-  // Loading state for fetching domain data
+ 
   const [loadingData, setLoadingData] = useState<boolean>(true);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function Domain({ params }: DomainProps) {
           console.error("Error fetching domain data:", error);
           toast.error("Failed to fetch domain data.");
         } finally {
-          setLoadingData(false); // Set loading to false after data is fetched
+          setLoadingData(false); 
         }
       };
       fetchData();
@@ -55,12 +55,12 @@ export default function Domain({ params }: DomainProps) {
   const [name, setName] = useState<string>('');
   const [message, setMessage] = useState<string>('');
 
-  // Loading state for submitting the message
+
   const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoadingSubmit(true); // Set loading to true when submitting the message
+    setLoadingSubmit(true); 
     try {
       const response = await axios.post('/api/client/showmessage', {
         username,
@@ -81,7 +81,7 @@ export default function Domain({ params }: DomainProps) {
       console.error("Error sending message:", error);
       toast.error("Something went wrong");
     } finally {
-      setLoadingSubmit(false); // Reset loading state after the request completes
+      setLoadingSubmit(false); 
     }
   };
 
