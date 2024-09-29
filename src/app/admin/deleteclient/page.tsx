@@ -39,7 +39,7 @@ function Page() {
       const response = await axios.post('/api/admindashbord/deleteclient', { id });
       if (response.data.success) {
         toast.success('Client removed successfully.');
-       
+        window.location.reload();
       } else {
         toast.error('Failed to remove client.');
       }
@@ -63,6 +63,7 @@ function Page() {
         setAllarts(Allarts.map(client => 
           client._id === id ? { ...client, isBlacklisted: !client.isBlacklisted } : client
         ));
+        window.location.reload();
       } else {
         toast.error(
           isBlacklisted ? 'Failed to unblacklist client.' : 'Failed to blacklist client.'
