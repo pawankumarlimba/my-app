@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
@@ -7,21 +7,22 @@ import Link from "next/link";
 import React, { useState } from 'react';
 import { toast } from "react-toastify";
 
-
 type Client = {
   username: string;
   password: string;
 };
 
 export default function AddClient() {
- 
   const [client, setClient] = useState<Client>({
     username: "",
     password: "",
   });
 
+  const [loading, setLoading] = useState(false); // State for loading
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when the form is submitted
 
     try {
       const response = await axios.post('/api/client/login', client);
@@ -34,7 +35,6 @@ export default function AddClient() {
         toast.error(response.data.error || "An error occurred");
       }
     } catch (error: unknown) {
-    
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.data && error.response.data.error) {
           toast.error(error.response.data.error);
@@ -42,6 +42,8 @@ export default function AddClient() {
       } else {
         toast.error("Something went wrong. Please try again.");
       }
+    } finally {
+      setLoading(false); // Reset loading state regardless of success or error
     }
   };
 
@@ -71,15 +73,16 @@ export default function AddClient() {
             />
           </LabelInputContainer>
           <button
-            className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+            className={`bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             type="submit"
+            disabled={loading} // Disable button when loading
           >
-            Sign In &rarr;
+            {loading ? 'Loading...' : 'Sign In '}
             <BottomGradient />
           </button>
           <Link href={"/admin/login"}>
             <button
-              className="mt-4 bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+              className="mt-4 bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset]"
               type="button"
             >
               Login as Admin &rarr;

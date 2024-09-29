@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
                 { status: 400 }
             );
         }
-console.log(username);
+//console.log(username);
         const client = await Client.findOne({ username }).select('-password');
 
         if (!client) {

@@ -27,6 +27,9 @@ export default function Domain({ params }: DomainProps) {
   const [url, setUrl] = useState<string | null>(null);
   const [blacklist, setBlacklist] = useState<boolean>(false);
 
+  // Loading state for fetching domain data
+  const [loadingData, setLoadingData] = useState<boolean>(true);
+
   useEffect(() => {
     if (username) {
       const fetchData = async () => {
@@ -40,6 +43,8 @@ export default function Domain({ params }: DomainProps) {
         } catch (error) {
           console.error("Error fetching domain data:", error);
           toast.error("Failed to fetch domain data.");
+        } finally {
+          setLoadingData(false); // Set loading to false after data is fetched
         }
       };
       fetchData();
@@ -50,8 +55,12 @@ export default function Domain({ params }: DomainProps) {
   const [name, setName] = useState<string>('');
   const [message, setMessage] = useState<string>('');
 
+  // Loading state for submitting the message
+  const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoadingSubmit(true); // Set loading to true when submitting the message
     try {
       const response = await axios.post('/api/client/showmessage', {
         username,
@@ -59,10 +68,9 @@ export default function Domain({ params }: DomainProps) {
         name,
         message,
       });
-   console.log(response);
+      console.log(response);
       if (response.data.success) {
         toast.success("Message sent successfully");
-        
         setEmail('');
         setName('');
         setMessage('');
@@ -72,10 +80,12 @@ export default function Domain({ params }: DomainProps) {
     } catch (error) {
       console.error("Error sending message:", error);
       toast.error("Something went wrong");
+    } finally {
+      setLoadingSubmit(false); // Reset loading state after the request completes
     }
   };
 
-  console.log("Domain url:",domainData); 
+  console.log("Domain url:", domainData); 
 
   return (
     <div className="flex flex-col">
@@ -142,10 +152,11 @@ export default function Domain({ params }: DomainProps) {
                   />
                 </LabelInputContainer>
                 <button
-                  className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset]"
+                  className={`bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] ${loadingSubmit ? 'opacity-50 cursor-not-allowed' : ''}`}
                   type="submit"
+                  disabled={loadingSubmit} 
                 >
-                  Send Response &rarr;
+                  {loadingSubmit ? 'Sending...' : 'Send Response'}
                   <BottomGradient />
                 </button>
               </form>
