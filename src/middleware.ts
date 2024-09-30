@@ -55,7 +55,8 @@ export const config = {
     '/client/login',              
     '/admin/addclient',             
     '/admin/deleteclient',  
-    '/client'
+    '/client',
+    '/admin/dashbord'
                
   ],
 };
