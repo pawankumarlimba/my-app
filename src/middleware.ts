@@ -9,9 +9,10 @@ export function middleware(request: NextRequest) {
   console.log("This is hostname:", hostname);
   
   if (hostname) {
-    if (hostname === "my-app-two-delta-88.vercel.app/") {
+    if (hostname === "my-app-two-delta-88.vercel.app") {
      
       console.log("apiRewriteUrl:", hostname);
+      return NextResponse.next();
      
     } else {
       const subdomain = hostname.split(".")[0]; // Extract the subdomain
