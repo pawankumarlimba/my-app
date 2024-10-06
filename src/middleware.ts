@@ -1,9 +1,26 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+
 export function middleware(request: NextRequest) {
   console.log('Middleware is running');
   const path = request.nextUrl.pathname;
+  const hostname=request.headers.get("host");
+  console.log( "this is hostname",hostname);
+  if (hostname) {
+
+    const subdomain = hostname.split(".")[0];
+    
+    console.log("Subdomain:", subdomain);
+    const apiRewriteUrl = request.nextUrl.clone();
+    apiRewriteUrl.pathname = `/client/${subdomain}`; 
+console.log("apiRewriteUrl apiRewriteUrl",apiRewriteUrl);
+    console.log("Redirecting to:", apiRewriteUrl.href);
+    
+    return NextResponse.rewrite(apiRewriteUrl);
+  }
+
+ 
   const isPublic = path === '/' || path === '/admin/login' || path === '/client/login';
 
 
