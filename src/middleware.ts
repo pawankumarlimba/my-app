@@ -8,8 +8,8 @@ export function middleware(request: NextRequest) {
   
   console.log("This is hostname:", hostname);
   
-  /*if (hostname) {
-    if (hostname === "my-app-two-delta-88.vercel.app/") {
+  if (hostname) {
+    if (hostname === "my-app-two-delta-88.vercel.app") {
      
       console.log("apiRewriteUrl:", hostname);
      
@@ -23,7 +23,7 @@ export function middleware(request: NextRequest) {
       console.log("apiRewriteUrl:", apiRewriteUrl.href);
       return NextResponse.rewrite(apiRewriteUrl);
     }
-  }*/
+  }
 
   const isPublic = path === '/' || path === '/admin/login' || path === '/client/login';
 
@@ -70,6 +70,6 @@ export const config = {
     '/admin/addclient',             
     '/admin/deleteclient',  
     '/client',
-    '/admin/dashbord' // Fixed typo here
+    '/admin/dashbord'
   ],
 };
