@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
             });
         }
 
-        
+         //testing
         if (client.isBlacklisted) {
            
             return NextResponse.json({
